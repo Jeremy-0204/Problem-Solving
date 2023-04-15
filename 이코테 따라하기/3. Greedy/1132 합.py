@@ -24,18 +24,44 @@ alpha = dict(sorted(alpha.items(), key = lambda x: x[1]))
 print(alpha)
 
 for i in alpha:
+    flag = 0
     for word in array[::-1]:
         if i[0] in word and len(word) == 1: 
-            alpha[i[0]] *= -1
             break
         elif i[0] in word and len(word) > 1: 
             print(word, i[0])
-            continue
- 
+            flag = 1
+            alpha[i[0]] *= -1
+            break
+    if flag == 1: break
+
+print(alpha)
+alpha = dict(sorted(alpha.items(), key = lambda x: x[1], reverse = True))
 print(alpha)
 
+i = 9
+for a in alpha:
+    if i > 0:
+        alpha[a] = i
+        i -= 1
+    else: alpha[a] = i
 
+print(alpha)
 
+result = []
+
+for word in array:
+    new_word = ''
+    for i in range(len(word)):
+        if word[i] in alpha: new_word += str(alpha[word[i]])
+    result.append(new_word)
+
+print(result)
+count = 0
+for i in result:
+    count += int(i)
+
+print(count)
 
 # ABC
 # BCA 가중치는 len(word) - i로 주면 되겠다
