@@ -4,22 +4,23 @@ array = []
 for _ in range(n):
     array.append(str(input()))
 
-array = sorted(array, key = lambda word: len(word), reverse = True)
+array = sorted(array, key = lambda word: len(word), reverse = True) # 단어 길이 역순으로 정렬시키기
 print(array)
 
 alpha = sorted(set(''.join(array))) # 지금까지 들어있는 알파벳만 추출
 alpha = {a : 0 for a in alpha} # 알파벳 A~J, 가중치 dict 생성
-
 print(alpha)
 
-for target in alpha.keys():
+
+# 가중치 부가
+for target in alpha.keys(): # target은 dict안의 빈도수를 찾아야 할 알파벳
     count = 0
     for word in array:
-        index = [len(word) - i for i, char in enumerate(word) if char == target]
-        count += sum(index)
-    alpha[target] = count
+        index = [10**(len(word) - i) for i, char in enumerate(word) if char == target] # len(word) - i 하면 각자의 자릿수에 맞는 가중치를 받음. 이를 10의 제곱수로 가중치를 차례로 부여함
+        count += sum(index) # 가중치 합계
+    alpha[target] = count # 딕셔너리 업데이트
 
-alpha = dict(sorted(alpha.items(), key = lambda x: x[1]))
+alpha = dict(sorted(alpha.items(), key = lambda x: x[1])) # 가중치 순서대로 정렬
 
 print(alpha)
 
@@ -39,6 +40,8 @@ print(alpha)
 alpha = dict(sorted(alpha.items(), key = lambda x: x[1], reverse = True))
 print(alpha)
 
+
+# 주어진 가중치 별 숫자 부여
 i = 9
 for a in alpha:
     if i > 0:
@@ -48,8 +51,9 @@ for a in alpha:
 
 print(alpha)
 
-result = []
 
+# str을 숫자로 변환
+result = []
 for word in array:
     new_word = ''
     for i in range(len(word)):
@@ -57,6 +61,8 @@ for word in array:
     result.append(new_word)
 
 print(result)
+
+# 숫자들 합 구하기
 count = 0
 for i in result:
     count += int(i)
