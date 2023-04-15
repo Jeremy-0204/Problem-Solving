@@ -27,9 +27,9 @@ print(alpha)
 for i in alpha:
     flag = 0
     for word in array[::-1]:
-        if i[0] in word and len(word) == 1: 
+        if i[0] in word and len(set(word)) == 1: 
             break
-        elif i[0] in word and len(word) > 1: 
+        elif i[0] in word and len(set(word)) > 1: # 한글자가 예외가 아니라, 같은 글자만 있으면 0이 될 수 없으니까 set으로 묶어서 원소가 여러개면 0으로 바꿔도 됨
             print(word, i[0])
             flag = 1
             alpha[i[0]] *= -1
