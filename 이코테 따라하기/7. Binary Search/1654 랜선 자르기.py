@@ -4,7 +4,7 @@ array = []
 for _ in range(n):
     array.append(int(input()))
 
-start = 0
+start = 1
 end = max(array)
 result = 0
 
@@ -13,7 +13,7 @@ while start <= end:
     mid = (start + end) // 2
 
     for i in array: 
-        if i > mid: total += i // mid
+        total += i // mid
 
     if total < m: end = mid -1
     else: 
