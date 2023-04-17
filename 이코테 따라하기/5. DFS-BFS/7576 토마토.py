@@ -33,23 +33,19 @@ def bfs():
             if graph[nx][ny] == 0:
                 graph[nx][ny] = graph[x][y] + 1
                 que.append((nx, ny))
-        
+
+        # 그래프 출력 용도        
         # for i in range(n):
         #     print(graph[i])
         # print()
 
-
 bfs()
 
-result = max(max(graph)) - 1
-for i in range(n):
-    for j in range(m):
-        if graph[i][j] == 0: 
-            result = -1
-            break
-    if result == -1: break
+# 모든 토마토가 다 익은 경우
+if all(0 not in row for row in graph): print(max(map(max, graph)) - 1)
 
-print(result)
+# 일부 토마토가 익지 않은 경우
+else: print(-1)
 
 # 1이 어디있는지 찾아야 할까?
 
