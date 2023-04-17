@@ -5,29 +5,27 @@ x, y = 0, 0
 for _ in range(n):
     graph.append(list(map(int, input().split())))
 
-for i in range(n):
-    for j in range(m):
-        if graph[i][j] == 1:
-            x, y = i, j
-            break
-    if x != 0 and y != 0: break
-
 print(x, y)
 # 이동할 네 방향 (상,하,좌,우)
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
 
-def bfs(x, y):
+def bfs(graph):
     que = deque()
-    que.append((x, y))
-    days = 0
+
+    for i in range(n):
+        for j in range(m):
+            if graph[i][j] == 1:
+                x, y = i, j
+                break
+        if x != 0 and y != 0: que.append(x, y)
 
     while que:
         x, y = que.popleft()
 
         for i in range(4):
-            nx, ny = x + dx[i], x + dy[i]
+            nx, ny = x + dx[i], y + dy[i]
 
             # 그래프 범위 벗어나면 무시
             if nx < 0 or ny < 0 or nx >= n or ny >= m: continue
@@ -38,15 +36,16 @@ def bfs(x, y):
             # 아직 안익은 경우
             if graph[nx][ny] == 0:
                 graph[nx][ny] = graph[x][y] + 1
-                days += 1
                 que.append((nx, ny))
         
-        print(graph)
+        for i in range(n):
+            print(graph[i])
+        print()
 
 
-    return days
+    return (max(graph), min(graph))
 
-print(bfs(x,y))
+print(bfs(graph))
 
 # 1이 어디있는지 찾아야 할까?
 
