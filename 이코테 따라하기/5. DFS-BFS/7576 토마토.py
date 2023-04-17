@@ -5,21 +5,17 @@ x, y = 0, 0
 for _ in range(n):
     graph.append(list(map(int, input().split())))
 
-print(x, y)
 # 이동할 네 방향 (상,하,좌,우)
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
-
-def bfs(graph):
+def bfs():
     que = deque()
 
     for i in range(n):
         for j in range(m):
             if graph[i][j] == 1:
-                x, y = i, j
-                break
-        if x != 0 and y != 0: que.append(x, y)
+                que.append((i, j))
 
     while que:
         x, y = que.popleft()
@@ -38,14 +34,22 @@ def bfs(graph):
                 graph[nx][ny] = graph[x][y] + 1
                 que.append((nx, ny))
         
-        for i in range(n):
-            print(graph[i])
-        print()
+        # for i in range(n):
+        #     print(graph[i])
+        # print()
 
 
-    return (max(graph), min(graph))
+bfs()
 
-print(bfs(graph))
+result = max(max(graph)) - 1
+for i in range(n):
+    for j in range(m):
+        if graph[i][j] == 0: 
+            result = -1
+            break
+    if result == -1: break
+
+print(result)
 
 # 1이 어디있는지 찾아야 할까?
 
