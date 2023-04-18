@@ -51,7 +51,7 @@ for _ in range(n):
         
         else: # b=='D'
             if b=="-1":
-                while minq and visited[minq[0][1]]:
+                while minq and visited[minq[0][1]]: # minq도 안비어있고, visited True 일때
                     heapq.heappop(minq)
                 if minq:
                     visited[minq[0][1]] = 1
