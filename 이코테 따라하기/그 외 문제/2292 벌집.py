@@ -1,4 +1,5 @@
 n = int(input())
 
-for i in range(1, n, i + 6):
-    
+i = 1
+while n > 3 * i ** 2 - 3 * i + 1: i += 1
+print(i)
