@@ -28,6 +28,7 @@ n, m, b = map(int, sys.stdin.readline().split())
 table = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
 height = 0
 ans = 1e9
+
 for i in range(257):
     max = 0
     min = 0
