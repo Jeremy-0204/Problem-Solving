@@ -14,5 +14,3 @@ for i in num_li:
 for i in range(m):
     a, b = map(int, input().split())
     print(sum_li[b] - sum_li[a-1])
-
-print(sum_li)
