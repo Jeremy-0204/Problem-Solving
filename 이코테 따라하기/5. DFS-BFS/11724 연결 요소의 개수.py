@@ -1,32 +1,25 @@
 import sys
-input = sys.stdin.readline
-N, M = map(int, input().split())
-# 인접 리스트 -> 인덱스를 그대로 정점의 번호로 사용
-graph = list([] for _ in range(N+1))
+sys.setrecursionlimit(10000)
 
-# 연결 요소 개수
-cnt = 0
+def dfs(v):
+    visited[v] = True
+    for e in adj[v]:
+        if not visited[e]:
+            dfs(e)
+            
+N, M = map(int, input().split())
+adj = [[] for _ in range(N + 1)]
+visited = [False] * (N + 1)
+count = 0
 
 for _ in range(M):
-    a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
+    u, v = map(int, input().split())
+    adj[u].append(v)
+    adj[v].append(u)
+    
+for j in range(1, N + 1):
+    if not visited[j]:
+        dfs(j)
+        count += 1
 
-# DFS 실시
-visited = [False] * (N+1)
-def DFS(x):
-    visited[x] = True
-
-    for node in graph[x]:
-        if not visited[node]:
-            DFS(node)
-
-
-cnt = 0
-
-for i in range(1, N+1):
-    if not visited[i]:
-        DFS(i)
-        cnt += 1
-
-print(cnt)
+print(count)
