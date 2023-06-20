@@ -15,9 +15,12 @@ for _ in range(n):
 
 que = deque(sorted(list))
 
-for _ in range(int(rtrim / 2)):
-    que.popleft()
-    que.pop()
+if n == 0:
+    ans = 0
+else:
+    for _ in range(int(rtrim / 2)):
+        que.popleft()
+        que.pop()
+    ans = osaoip(sum(que) / len(que))
 
-ans = osaoip(sum(que) / len(que))
 print(ans)
