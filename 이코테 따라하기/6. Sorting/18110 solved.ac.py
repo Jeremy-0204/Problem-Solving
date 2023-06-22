@@ -1,26 +1,56 @@
+# import sys
+# from collections import deque
+
+# def osaoip(num): return round(num+10**(-len(str(num))-1))
+
+# input = sys.stdin.readline
+# list = []
+
+# n = int(input())
+# trim = n * 30 / 100
+# rtrim = osaoip(trim)
+
+# for _ in range(n):
+#     list.append(int(input()))
+
+# que = deque(sorted(list))
+
+# if n <= 0:
+#     ans = 0
+# else:
+#     for _ in range(int(rtrim / 2)):
+#         que.popleft()
+#         que.pop()
+#     ans = osaoip(sum(que) / len(que))
+
+# print(ans)
+
 import sys
+input = sys.stdin.readline
+
 from collections import deque
 
-def osaoip(num): return round(num+10**(-len(str(num))-1))
+import decimal
+context = decimal.getcontext()
+context.rounding = decimal.ROUND_HALF_UP
 
-input = sys.stdin.readline
-list = []
+comment =  int(input())
 
-n = int(input())
-trim = n * 30 / 100
-rtrim = osaoip(trim)
+level_list = []
 
-for _ in range(n):
-    list.append(int(input()))
+for i in range(comment):
+  level = int(input())
+  level_list.append(level)
 
-que = deque(sorted(list))
+level_list.sort()
 
-if n == 0:
-    ans = 0
+deq = deque(level_list)
+if comment == 0:
+  print('0')
 else:
-    for _ in range(int(rtrim / 2)):
-        que.popleft()
-        que.pop()
-    ans = osaoip(sum(que) / len(que))
+  num = round(decimal.Decimal(comment*0.15),0)
+  for i in range(int(num)):
+    deq.pop()
+    deq.popleft()
 
-print(ans)
+  print(round(decimal.Decimal(sum(deq) / len(deq)), 0))
