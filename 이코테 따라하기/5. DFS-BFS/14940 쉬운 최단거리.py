@@ -36,7 +36,7 @@ def bfs(start, end):
             nx, ny = dx[i] + x, dy[i] + y
 
             # 범위 체크
-            if nx < 0 or ny < 0 or nx >= m or ny >= n: continue
+            if nx < 0 or ny < 0 or nx >= n or ny >= m: continue
 
             if visited[nx][ny] == -1 and graph[nx][ny] != 0:
                 visited[nx][ny] = 1
