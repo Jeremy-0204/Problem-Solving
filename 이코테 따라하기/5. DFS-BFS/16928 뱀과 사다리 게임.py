@@ -1,17 +1,43 @@
-n, m = map(int,input().split())
+import sys
+from collections import deque
+input = sys.stdin.readline
 
-graph = []
+def bfs():
+    que = deque()
+    que.append(1)
+    visited[1] = True
 
-for _ in range(n + m):
+    while que:
+        current = que.popleft()
+        for i in range(1, 7):
+            next_move = current + i
+
+            if 1 <= next_move <= 100 and not visited[next_move]:
+                if next_move in snake.keys():
+                    next_move = snake[next_move]
+                if next_move in ladder.keys():
+                    next_move = ladder[next_move]
+                if not visited[next_move]:
+                    que.append(next_move)
+                    visited[next_move] = True
+                    board_cnt[next_move] = board_cnt[current] + 1
+            
+
+
+n, m = map(int, input().split())
+board_cnt = [0] * 101
+visited = [False] * 101
+
+ladder = dict()
+snake = dict()
+
+for _ in range(n):
     x, y = map(int, input().split())
-    graph.append((x,y))
+    ladder[x] = y
 
-print(graph)
+for _ in range(m):
+    x, y = map(int, input().split())
+    snake[x] = y
 
-# 시작은 (1,1)
-
-# x를 만나면 y로 이동
-
-# 주사위를 몇개 던져야 최대가 될지를 어떻게 구하지?
-
-# 
+bfs()
+print(board_cnt[100])
