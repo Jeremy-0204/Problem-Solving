@@ -5,14 +5,15 @@ n, m = map(int, input().split())
 numbers = sorted(list(map(int, input().split())))
 s= []
 
-def dfs(start):
+def dfs():
     if len(s) == m:
         print(*s)
         return
     
-    for i in range(start, n):
-        s.append(numbers[i])
-        dfs(i)
-        s.pop()
+    for i in range(n):
+        if numbers[i] not in s:
+            s.append(numbers[i])
+            dfs()
+            s.pop()
 
-dfs(0)
+dfs()
